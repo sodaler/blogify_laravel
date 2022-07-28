@@ -17,4 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Blog', 'prefix' => 'blog'], function() {
+    Route::resource('posts', \App\Http\Controllers\Blog\PostController::class)->names('blog.posts');
+});
+
 Route::resource('rest', \App\Http\Controllers\RestTestController::class)->names('restTest');

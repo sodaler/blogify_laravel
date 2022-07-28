@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
-use App\Http\Controllers\Blog\BaseController;
+use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
-class RestTestController extends BaseController
+class PostController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        dd(1111);
+        $items = BlogPost::all();
+
+        return view('blog.index', compact('items'));
     }
 
     /**
@@ -46,7 +49,7 @@ class RestTestController extends BaseController
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
