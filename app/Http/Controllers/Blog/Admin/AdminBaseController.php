@@ -6,5 +6,5 @@ use App\Http\Controllers\Blog\BaseController;
 
 abstract class AdminBaseController extends BaseController
 {
-    //
+
 }
