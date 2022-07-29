@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 
-use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
-use App\Models\BlogPost;
-use Database\Seeders\BlogCategoriesTableSeeder;
 use Illuminate\Http\Request;
 
 class CategoryController extends AdminBaseController
@@ -59,11 +56,14 @@ class CategoryController extends AdminBaseController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        dd(__METHOD__);
+        $item = BlogCategory::findOrFail($id);
+        $categoryList = BlogCategory::all();
+
+        return view('blog.admin.category.edit', compact('item','categoryList'));
     }
 
     /**
