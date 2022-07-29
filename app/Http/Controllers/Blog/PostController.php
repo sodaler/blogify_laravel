@@ -17,7 +17,7 @@ class PostController extends BaseController
     {
         $items = BlogPost::all();
 
-        return view('blog.index', compact('items'));
+        return view('blog.posts.index', compact('items'));
     }
 
     /**
