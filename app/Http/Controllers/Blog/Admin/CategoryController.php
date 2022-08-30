@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 
+use App\Http\Requests\Blog\Category\CreateRequest;
 use App\Http\Requests\Blog\Category\UpdateRequest;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
@@ -24,22 +25,40 @@ class CategoryController extends AdminBaseController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        dd(__METHOD__);
+        $item = new BlogCategory();
+        $categoryList = BlogCategory::all();
+
+        return view('blog.admin.categories.edit', compact('item', 'categoryList'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        dd(__METHOD__);
+        $data = $request->input();
+        if (empty($data['slug'])) {
+            $data['slug'] = str_slug($data['title']);
+        }
+
+        // Create obj, but not add in db
+        $item = new BlogCategory($data);
+        $item->save();
+
+        if ($item) {
+            return redirect()->route('blog.admin.categories.edit', [$item->id])
+                ->with(['success' => 'Saved Successfully']);
+        } else {
+            return back()->withErrors(['msg' => 'Save error'])
+                ->withInput();
+        }
     }
 
     /**
@@ -84,7 +103,12 @@ class CategoryController extends AdminBaseController
         }
 
         $data = $request->all();
-        $result = $item->fill($data)->save();
+
+        if (empty($data['slug'])) {
+            $data['slug'] = str_slug($data['title']);
+        }
+
+        $result = $item->update($data);
 
         if ($result) {
             return redirect()

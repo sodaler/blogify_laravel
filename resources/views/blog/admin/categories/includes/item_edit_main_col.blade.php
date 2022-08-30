@@ -16,7 +16,7 @@
                         <div class="tab-pane active" id="maindata" role="tabpanel">
                             <div class="form-group">
                                 <label for="title">Title</label>
-                                <input name="title" value="{{ $item->title }}"
+                                <input name="title" value="{{ old('title', $item->title) }}"
                                        id="title"
                                        type="text"
                                        class="form-control"
@@ -25,20 +25,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="slug">Title</label>
-                                <input name="slug" value="{{ $item->slug }}"
+                                <label for="slug">Slug</label>
+                                <input name="slug" value="{{ old('slug', $item->slug) }}"
                                        id="slug"
                                        type="text"
                                        class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <label for="parent_id">Title</label>
+                                <label for="parent_id">Parent</label>
                                 <select name="parent_id" value="{{ $item->parent_id }}"
                                         id="parent_id"
                                         type="text"
                                         class="form-control"
-                                        placeholder="Choose category"
                                         required>
                                     @foreach($categoryList as $categoryOption)
                                         <option value="{{ $categoryOption->id }}"
