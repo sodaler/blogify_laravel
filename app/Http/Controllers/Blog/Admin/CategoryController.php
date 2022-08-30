@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 
+use App\Http\Requests\Blog\Category\UpdateRequest;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 
@@ -73,7 +74,7 @@ class CategoryController extends AdminBaseController
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $item = BlogCategory::find($id);
         if (empty($item)) {
