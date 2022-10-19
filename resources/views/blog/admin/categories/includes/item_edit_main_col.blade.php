@@ -8,7 +8,7 @@
                 <div class="card-title">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                           <a class="nav-link active" data-toggle="tab" href="$maindata" role="tab">Main data</a>
+                           <a class="nav-link active" data-toggle="tab" href="#maindata" role="tab">Main data</a>
                         </li>
                     </ul>
                     <br>
@@ -42,7 +42,7 @@
                                     @foreach($categoryList as $categoryOption)
                                         <option value="{{ $categoryOption->id }}"
                                                 @if($categoryOption->id === $item->parent_id) selected @endif>
-                                                {{ $categoryOption->id }} . {{ $categoryOption->title }}
+                                                {{ $categoryOption->id_title }}
                                         </option>
                                     @endforeach
                                 </select>
