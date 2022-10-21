@@ -69,7 +69,6 @@ class BlogCategoryRepository extends CoreRepository
      *
      * @return LengthAwarePaginator
      */
-
     public function getAllWithPaginate(int $perPage = null): LengthAwarePaginator
     {
         $columns = ['id', 'title', 'parent_id'];
