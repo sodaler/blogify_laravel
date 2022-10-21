@@ -30,11 +30,16 @@ $groupData = [
     'prefix' => 'admin/blog',
 ];
 Route::group($groupData, function () {
-    //BlogCategory
+    // BlogCategory
     $methods = ['index', 'edit', 'update', 'create', 'store',];
     Route::resource('categories', \App\Http\Controllers\Blog\Admin\CategoryController::class)
         ->only($methods)
         ->names('blog.admin.categories');
+
+    // BlogPost
+    Route::resource('posts', \App\Http\Controllers\Blog\Admin\PostController::class)
+        ->except(['show'])
+        ->names('blog.admin.posts');
 });
 
 //Route::resource('rest', \App\Http\Controllers\RestTestController::class)->names('restTest');

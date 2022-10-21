@@ -1,28 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\BlogPost;
+use App\Repositories\BlogPostRepository;
 use Illuminate\Http\Request;
 
 /**
  * Blog post management
  *
- * @package App\Http\Controllers\Blog
+ * @package App\Http\Controllers\Blog\Admin
  */
-class PostController extends BaseController
+class PostController extends AdminBaseController
 {
+    /**
+     * @var BlogPostRepository
+     */
+    private BlogPostRepository $blogPostRepository;
+
+    /**
+     * PostController constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->blogPostRepository = app(BlogPostRepository::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $items = BlogPost::all();
-
-        return view('blog.posts.index', compact('items'));
+        return view('blog.admin.posts.index');
     }
 
     /**
